@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'League Spartan';
+    src: url('./fonts/League_Spartan/LeagueSpartan-Bold.ttf'); 
+}
+
+.titulo{
+    margin-top: 10px;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.titulo:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease, color 0.3s ease; 
+    color: #d12af7;
+}
