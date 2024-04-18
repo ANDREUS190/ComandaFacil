@@ -11,5 +11,5 @@
 .titulo:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease, color 0.3s ease; 
-    color: #d12af7;
+    color: gray;
 }
