@@ -14,6 +14,9 @@
             <li class="nav-item">
               <a class="nav-link" href="menu.php">Menú</a>
             </li>
+            <li class="nav-item active">
+                            <a class="nav-link" href="cocina.php">Cocina</a>
+                        </li>
             <li class="nav-item">
               <a class="nav-link" href="empleados.php">Empleados</a>
             </li>

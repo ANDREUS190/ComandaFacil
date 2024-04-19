@@ -1,5 +1,4 @@
 <?php
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -68,8 +67,9 @@ if (isset($_SESSION['login_user'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="menu.php">Menú</a>
                         </li>
+
                         <li class="nav-item active">
-                            <a class="nav-link" href="cocina.php">Cocina</a>
+                            <a class="nav-link" href="empleados.php">Empleados</a>
                         </li>
                         <li class="nav-item">
                             <form action="#" method="post">
@@ -77,6 +77,7 @@ if (isset($_SESSION['login_user'])) {
                                 <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
                             </form>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -84,24 +85,15 @@ if (isset($_SESSION['login_user'])) {
     </header>
 
     <div class="container mt-5">
-        <h2>Gestión de Pedidos</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Código del Pedido</th>
-                    <th>Nombre</th>
-                    <th>Precio Total</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tablaPedidos">
-            </tbody>
-        </table>
+        <h2>Pedidos Pagados</h2>
+        <div id="pedidosPagados" class="row">
+        </div>
     </div>
 
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="actualizar_pedidos.js"></script>
+    <script src="actualizar_pedidos_pagados.js"></script>
+
+    
 </body>
 
 </html>

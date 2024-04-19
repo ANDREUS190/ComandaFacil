@@ -11,7 +11,7 @@
 </head>
 
 <body class="bg-dark">
-    <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
     <div id="login-form" class="container mt-5">
         <div class="card">

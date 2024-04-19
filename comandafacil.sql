@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-04-2024 a las 19:26:57
+-- Tiempo de generación: 19-04-2024 a las 23:32:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -104,19 +104,19 @@ CREATE TABLE `clientes` (
 --
 
 CREATE TABLE `cocineros` (
-  `ID_Cocinero` int(11) NOT NULL,
+  `id_cocinero` int(11) NOT NULL,
   `Nombre` varchar(50) DEFAULT NULL,
   `Apellido` varchar(50) DEFAULT NULL,
-  `Usuario` varchar(50) DEFAULT NULL,
-  `Contraseña` varchar(255) DEFAULT NULL
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `cocineros`
 --
 
-INSERT INTO `cocineros` (`ID_Cocinero`, `Nombre`, `Apellido`, `Usuario`, `Contraseña`) VALUES
-(1, 'Sergio', 'Andreu', 'andreu', 'password');
+INSERT INTO `cocineros` (`id_cocinero`, `Nombre`, `Apellido`, `username`, `password`) VALUES
+(2, 'Sergio', 'Andreu', 'andreu', 'password');
 
 -- --------------------------------------------------------
 
@@ -173,33 +173,6 @@ CREATE TABLE `pedidodetalle` (
   `precio_plato` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `pedidodetalle`
---
-
-INSERT INTO `pedidodetalle` (`ID_Detalle`, `ID_Pedido`, `nombre_plato`, `precio_plato`) VALUES
-(1, NULL, 'Gazpacho', 0.00),
-(2, NULL, 'Tortilla Española', 0.00),
-(3, NULL, 'Paella Valenciana', 0.00),
-(4, NULL, 'Churros con Chocolate', 0.00),
-(5, NULL, 'Tortilla Española', 0.00),
-(6, NULL, 'Gazpacho', 0.00),
-(7, NULL, 'Nombre del aperitivo 1', 0.00),
-(8, NULL, 'Nombre de la bebida 2', 0.00),
-(9, NULL, 'Paella Valenciana', 0.00),
-(10, NULL, 'Gazpacho', 0.00),
-(11, NULL, 'Nombre del bocadillo 1', 0.00),
-(12, NULL, 'Nombre del bocadillo 2', 0.00),
-(13, NULL, 'Nombre del aperitivo 2', 0.00),
-(14, NULL, 'Nombre del bocadillo 2', 0.00),
-(15, NULL, 'Nombre del bocadillo 1', 0.00),
-(16, NULL, 'Churros con Chocolate', 0.00),
-(17, NULL, 'Nombre del bocadillo 1', 0.00),
-(18, NULL, 'Paella Valenciana', 0.00),
-(19, NULL, 'Tortilla Española', 0.00),
-(20, NULL, 'Paella Valenciana', 0.00),
-(21, NULL, 'Gazpacho', 0.00);
-
 -- --------------------------------------------------------
 
 --
@@ -207,11 +180,15 @@ INSERT INTO `pedidodetalle` (`ID_Detalle`, `ID_Pedido`, `nombre_plato`, `precio_
 --
 
 CREATE TABLE `pedidos` (
-  `ID_Pedido` int(11) NOT NULL,
-  `ID_Cliente` int(11) DEFAULT NULL,
-  `Fecha` date DEFAULT NULL,
-  `Total` decimal(5,2) DEFAULT NULL,
-  `Pagado` tinyint(1) DEFAULT NULL
+  `id_pedido` int(11) NOT NULL,
+  `correo` varchar(255) DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `numero_mesa` int(11) DEFAULT NULL,
+  `carrito` text DEFAULT NULL,
+  `codigo_Pago` varchar(255) DEFAULT NULL,
+  `precio_total` decimal(10,2) DEFAULT NULL,
+  `pagado` tinyint(1) NOT NULL DEFAULT 0,
+  `Finalizado` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
@@ -267,7 +244,7 @@ ALTER TABLE `clientes`
 -- Indices de la tabla `cocineros`
 --
 ALTER TABLE `cocineros`
-  ADD PRIMARY KEY (`ID_Cocinero`);
+  ADD PRIMARY KEY (`id_cocinero`);
 
 --
 -- Indices de la tabla `comidas`
@@ -298,8 +275,7 @@ ALTER TABLE `pedidodetalle`
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`ID_Pedido`),
-  ADD KEY `ID_Cliente` (`ID_Cliente`);
+  ADD PRIMARY KEY (`id_pedido`);
 
 --
 -- Indices de la tabla `postres`
@@ -339,7 +315,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `cocineros`
 --
 ALTER TABLE `cocineros`
-  MODIFY `ID_Cocinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cocinero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `comidas`
@@ -363,7 +339,7 @@ ALTER TABLE `pedidodetalle`
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `ID_Pedido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `postres`
@@ -379,24 +355,11 @@ ALTER TABLE `postres`
 -- Filtros para la tabla `detalle_pedidos`
 --
 ALTER TABLE `detalle_pedidos`
-  ADD CONSTRAINT `detalle_pedidos_ibfk_1` FOREIGN KEY (`ID_Pedido`) REFERENCES `pedidos` (`ID_Pedido`),
   ADD CONSTRAINT `detalle_pedidos_ibfk_2` FOREIGN KEY (`ID_Bebida`) REFERENCES `bebidas` (`ID_Bebida`),
   ADD CONSTRAINT `detalle_pedidos_ibfk_3` FOREIGN KEY (`ID_Comida`) REFERENCES `comidas` (`ID_Comida`),
   ADD CONSTRAINT `detalle_pedidos_ibfk_4` FOREIGN KEY (`ID_Postre`) REFERENCES `postres` (`ID_Postre`),
   ADD CONSTRAINT `detalle_pedidos_ibfk_5` FOREIGN KEY (`ID_Aperitivo`) REFERENCES `aperitivos` (`ID_Aperitivo`),
   ADD CONSTRAINT `detalle_pedidos_ibfk_6` FOREIGN KEY (`ID_Bocadillo`) REFERENCES `bocadillos` (`ID_Bocadillo`);
-
---
--- Filtros para la tabla `pedidodetalle`
---
-ALTER TABLE `pedidodetalle`
-  ADD CONSTRAINT `pedidodetalle_ibfk_1` FOREIGN KEY (`ID_Pedido`) REFERENCES `pedidos` (`ID_Pedido`);
-
---
--- Filtros para la tabla `pedidos`
---
-ALTER TABLE `pedidos`
-  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`ID_Cliente`) REFERENCES `clientes` (`ID_Cliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

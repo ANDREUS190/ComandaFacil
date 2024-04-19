@@ -1,28 +1,35 @@
 <?php
-if(isset($_POST['carrito'])) {
-    $carrito = json_decode($_POST['carrito'], true);
-    
-    $conn = mysqli_connect("localhost", "root", "", "comandafacil");
-    if (!$conn) {
-        die("Error al conectar con la base de datos: " . mysqli_connect_error());
-    }
-    
-    foreach($carrito as $item) {
-        $nombre = mysqli_real_escape_string($conn, $item['nombre']); 
-        $precio = floatval($item['precio']); 
-        
-        $sql = "INSERT INTO PedidoDetalle (nombre_plato, precio_plato) VALUES ('$nombre', $precio)";
-        
-        if (mysqli_query($conn, $sql)) {
-            echo "Pedido insertado correctamente en la base de datos.";
-        } else {
-            echo "Error al insertar pedido: " . mysqli_error($conn);
-        }
-    }
-    
-    mysqli_close($conn);
-    
-} else {
-    echo "No se ha recibido ningún dato del carrito.";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "comandafacil";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+$correo = $_POST['correo'];
+$nombre = $_POST['nombre'];
+$numero_mesa = $_POST['numero_mesa'];
+$carrito = json_decode($_POST['carrito'], true);
+
+$precio_total = 0;
+foreach ($carrito as $item) {
+    $precio_total += $item['precio'];
+}
+
+$codigo_pago = uniqid();
+
+$sql = "INSERT INTO Pedidos (Correo, Nombre, Numero_Mesa, Carrito, Codigo_Pago, Precio_Total)
+VALUES ('$correo', '$nombre', '$numero_mesa', '" . json_encode($carrito) . "', '$codigo_pago', $precio_total)";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Pedido procesado con éxito. Tu código de pago es: $codigo_pago";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
 ?>
