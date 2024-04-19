@@ -11,7 +11,7 @@ if(isset($_POST['carrito'])) {
         $nombre = mysqli_real_escape_string($conn, $item['nombre']); 
         $precio = floatval($item['precio']); 
         
-        $sql = "INSERT INTO Pedidos (nombre_plato, precio_plato) VALUES ('$nombre', $precio)";
+        $sql = "INSERT INTO PedidoDetalle (nombre_plato, precio_plato) VALUES ('$nombre', $precio)";
         
         if (mysqli_query($conn, $sql)) {
             echo "Pedido insertado correctamente en la base de datos.";
