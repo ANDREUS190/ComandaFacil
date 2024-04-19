@@ -10,10 +10,10 @@
 </head>
 
 <body class="bg-dark">
-  <?php include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
   <div class="d-flex justify-content-center align-items-center vh-100 mt-0">
-    <img src="./img/video_publi.gif" alt="Descripción del GIF">
+    <img src="./img/video_publi.gif" alt="publi">
   </div>
 
   <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -1,5 +1,4 @@
 <?php
-// Iniciar una sesión
 session_start();
 
 include '/db_conn.php';

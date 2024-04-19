@@ -1,27 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var carrito = [];
-  var carritoLista = document.getElementById('carrito-lista');
-  var enviarCarritoForm = document.getElementById('enviar-carrito-form');
-  var enviarCarritoButton = document.getElementById('enviar-carrito');
-  var errorMessage = document.createElement('p');
-  errorMessage.style.color = 'red';
-  errorMessage.textContent = 'Por favor, completa todos los campos del formulario antes de enviar el carrito.';
-  errorMessage.hidden = true;
-  enviarCarritoButton.parentNode.insertBefore(errorMessage, enviarCarritoButton);
-
-  function agregarAlCarrito(nombre, precio) {
-    carrito.push({ nombre: nombre, precio: precio });
-    actualizarCarrito();
-  }
-
-  function actualizarCarrito() {
-    carritoLista.innerHTML = '';
-    carrito.forEach(function (item) {
-      var li = document.createElement('li');
-      li.textContent = item.nombre + ' - $' + item.precio;
-      carritoLista.appendChild(li);
-    });
-  }
 
   document.querySelectorAll('.category-button').forEach(button => {
     button.addEventListener('click', function() {
@@ -72,37 +49,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       })
   }
-
-  enviarCarritoButton.addEventListener('click', function () {
-    var email = document.getElementById('email').value;
-    var name = document.getElementById('name').value;
-    var tableNumber = document.getElementById('table-number').value;
-
-    if (!email || !name || !tableNumber) {
-      errorMessage.hidden = false;
-      return;
-    }
-
-    errorMessage.hidden = true;
-    var formData = new FormData();
-    formData.append('carrito', JSON.stringify(carrito));
-
-    fetch('procesar_carrito.php', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.text();
-      }
-      throw new Error('Error al enviar el carrito al servidor.');
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  });
 
 });
