@@ -15,7 +15,7 @@
               <a class="nav-link" href="menu.php">Menú</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Empleados</a>
+              <a class="nav-link" href="empleados.php">Empleados</a>
             </li>
           </ul>
         </div>
