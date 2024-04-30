@@ -10,22 +10,22 @@
     <link href="estilos.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark">
+<body>
     <?php include 'header.php'; ?>
     <div class="container-fluid mt-5">
         <div class="row">
-            <div id="barra-menu" class="bg-dark">
+            <div id="barra-menu">
                 <div id="category-buttons" class="mb-3 d-flex justify-content-around">
                     <button class="btn btn-primary category-button py-md-3 px-md-5"
-                        data-category="Comidas">Comidas</button>
+                        data-category="comidas">Comidas</button>
                     <button class="btn btn-primary category-button py-md-3 px-md-5"
-                        data-category="Bebidas">Bebidas</button>
+                        data-category="bebidas">Bebidas</button>
                     <button class="btn btn-primary category-button py-md-3 px-md-5"
-                        data-category="Postres">Postres</button>
+                        data-category="postres">Postres</button>
                     <button class="btn btn-primary category-button py-md-3 px-md-5"
-                        data-category="Aperitivos">Aperitivos</button>
+                        data-category="aperitivos">Aperitivos</button>
                     <button class="btn btn-primary category-button py-md-3 px-md-5"
-                        data-category="Bocadillos">Bocadillos</button>
+                        data-category="bocadillos">Bocadillos</button>
                 </div>
 
             </div>
@@ -35,7 +35,7 @@
     </div>
 
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="ver_menu.js"></script>
+    <script src="scripts/ver_menu.js"></script>
 </body>
 
 </html>

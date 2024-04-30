@@ -20,9 +20,12 @@ foreach ($carrito as $item) {
     $precio_total += $item['precio'];
 }
 
-$codigo_pago = uniqid();
+do {
+    $codigo_pago = rand(100, 999);
+    $result = $conn->query("SELECT * FROM pedidos WHERE codigo_pago = '$codigo_pago'");
+} while ($result->num_rows > 0);
 
-$sql = "INSERT INTO Pedidos (Correo, Nombre, Numero_Mesa, Carrito, Codigo_Pago, Precio_Total)
+$sql = "INSERT INTO pedidos (Correo, nombre, numero_Mesa, carrito, codigo_pago, precio_total)
 VALUES ('$correo', '$nombre', '$numero_mesa', '" . json_encode($carrito) . "', '$codigo_pago', $precio_total)";
 
 if ($conn->query($sql) === TRUE) {

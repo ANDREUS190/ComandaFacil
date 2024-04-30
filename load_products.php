@@ -8,18 +8,18 @@
   }
 
   $category = $_GET['category'];
-  $id_column = 'ID_' . substr($category, 0, -1);
+  $id_column = 'id_' . substr($category, 0, -1);
 
   $result = mysqli_query($conn, "SELECT * FROM $category");
 
   $products = [];
   while ($row = mysqli_fetch_assoc($result)) {
     $products[] = [
-      'ID_Item' => $row[$id_column],
-      'Nombre' => $row['Nombre'],
-      'Descripción' => $row['Descripción'],
-      'Precio' => $row['Precio'],
-      'Imagen_URL' => isset($row['Imagen_URL']) ? $row['Imagen_URL'] : null
+      'id_item' => $row[$id_column],
+      'nombre' => $row['nombre'],
+      'descripcion' => $row['descripcion'],
+      'precio' => $row['precio'],
+      'imagen_url' => isset($row['imagen_url']) ? $row['imagen_url'] : 'nose'
     ];
   }
 

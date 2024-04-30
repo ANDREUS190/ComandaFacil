@@ -10,7 +10,7 @@ if ($conn->connect_error) {
     die("La conexión ha fallado: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Pedidos WHERE pagado = 1 AND finalizado = 0";
+$sql = "SELECT * FROM pedidos WHERE Finalizado = 0";
 $result = $conn->query($sql);
 $pedidos = array();
 

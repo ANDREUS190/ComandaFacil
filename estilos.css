@@ -15,14 +15,7 @@
 }
 
 header {
-    padding-bottom: 50px;
-}
-
-header {
-    position: sticky;
-    top: 60;
-    z-index: 1000;
-    /* Esto asegura que el header se mantenga encima de otros elementos */
+    padding-bottom: 20px;
 }
 
 #carrito {
@@ -34,5 +27,4 @@ header {
     position: sticky;
     top: 0px;
     z-index: 1000;
-    padding-bottom: 1px;
 }

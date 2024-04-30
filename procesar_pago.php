@@ -15,9 +15,11 @@ $id_pedido = $_POST['id_pedido'];
 $sql = "UPDATE Pedidos SET pagado = TRUE WHERE id_pedido = $id_pedido";
 
 if ($conn->query($sql) === TRUE) {
-    header("Location: empleados.php");
+    // Devuelve un mensaje JSON indicando éxito
+    echo json_encode(array("success" => true));
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    // En caso de error, devuelve un mensaje JSON con el error
+    echo json_encode(array("success" => false, "error" => "Error al marcar el pedido como pagado."));
 }
 
 $conn->close();

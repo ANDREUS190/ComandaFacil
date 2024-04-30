@@ -10,10 +10,10 @@
     <link href="estilos.css" rel="stylesheet">
 </head>
 
-<body class="bg-dark">
+<body>
 <?php include 'header.php'; ?>
 
-    <div id="login-form" class="container mt-5">
+    <div id="login-form" class="container">
         <div class="card">
             <div class="card-header">
                 <h2>Por favor, introduce tus datos</h2>
@@ -42,26 +42,26 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-9">
-                <div id="barra-menu" class="bg-dark">
+                <div id="barra-menu" class="card">
                     <div id="category-buttons" class="mb-3 d-flex justify-content-around">
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
-                            data-category="Comidas">Comidas</button>
+                            data-category="comidas">Comidas</button>
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
-                            data-category="Bebidas">Bebidas</button>
+                            data-category="bebidas">Bebidas</button>
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
-                            data-category="Postres">Postres</button>
+                            data-category="postres">Postres</button>
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
-                            data-category="Aperitivos">Aperitivos</button>
+                            data-category="aperitivos">Aperitivos</button>
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
-                            data-category="Bocadillos">Bocadillos</button>
+                            data-category="bocadillos">Bocadillos</button>
                     </div>
                 </div>
 
                 <form id="menu-form" class="row">
                 </form>
             </div>
-            <div class="col-md-3">
-                <aside id="carrito" class="bg-light p-3">
+            <div class="col-md-3 card">
+                <aside id="carrito" class="p-3">
                     <h4>Carrito</h4>
                     <ul id="carrito-lista">
                     </ul>
@@ -73,7 +73,7 @@
     <form id="enviar-carrito-form" action="procesar_carrito.php" method="POST"></form>
 
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="script_comanda.js"></script>
+    <script src="scripts/script_comanda.js"></script>
 </body>
 
 </html>
