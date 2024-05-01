@@ -15,7 +15,6 @@ function actualizarPedidos() {
             var tablaPedidos = document.querySelector('.table tbody');
             tablaPedidos.innerHTML = '';
             data.forEach(function (pedido) {
-                console.log(pedido);
                 var fila = document.createElement('tr');
                 fila.innerHTML = `
     <td>${pedido.codigo_Pago}</td>

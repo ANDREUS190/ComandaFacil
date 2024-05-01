@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -6,11 +8,8 @@ $dbname = "comandafacil";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("La conexión ha fallado: " . $conn->connect_error);
-}
 
-$sql = "SELECT * FROM pedidos WHERE Finalizado = 0";
+$sql = "SELECT * FROM pedidos WHERE pagado = TRUE AND finalizado = FALSE";
 $result = $conn->query($sql);
 $pedidos = array();
 

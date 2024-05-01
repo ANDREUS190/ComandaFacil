@@ -91,7 +91,7 @@ if (isset($_SESSION['login_user'])) {
     </div>
 
     <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/actualizar_pedidos_pagados.js"></script>
+    <script src="actualizar_pedidos_pagados.js"></script>
 
     
 </body>
