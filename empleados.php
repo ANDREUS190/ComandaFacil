@@ -124,10 +124,10 @@ if (isset($_SESSION['login_user'])) {
 <body class="bg-dark">
     <?php include 'header.php'; ?>
 
-    <div class="container d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card bg-light" style="width: 400px;">
             <div class="card-body d-flex flex-column justify-content-between">
-                <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+                <h2 class="card-title text-center mb-4">Empleados</h2>
                 <form id="loginForm" action="#" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Nombre de usuario:</label>

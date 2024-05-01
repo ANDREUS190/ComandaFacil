@@ -44,7 +44,7 @@ if (isset($_SESSION['login_user'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>ComandaFacil</title>
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="./estilos.css" rel="stylesheet">
 </head>
@@ -85,7 +85,7 @@ if (isset($_SESSION['login_user'])) {
     </header>
 
     <div class="container mt-5">
-        <h2>Pedidos Pagados</h2>
+        <h2 class="text-light">Pedidos Pagados</h2>
         <div id="pedidosPagados" class="row">
         </div>
     </div>
@@ -116,10 +116,10 @@ if (isset($_SESSION['login_user'])) {
 <body class="bg-dark">
     <?php include 'header.php'; ?>
 
-    <div class="container d-flex justify-content-center align-items-center">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card bg-light" style="width: 400px;">
             <div class="card-body d-flex flex-column justify-content-between">
-                <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+                <h2 class="card-title text-center mb-4">Cocina</h2>
                 <form id="loginForm" action="#" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Nombre de usuario:</label>

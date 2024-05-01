@@ -16,12 +16,16 @@ function actualizarPedidosCocina() {
             var pedidosPagados = document.querySelector('#pedidosPagados');
             pedidosPagados.innerHTML = '';
             data.forEach(function (pedido) {
+                var carrito = JSON.parse(pedido.carrito);
+                var carritoTexto = carrito.map(item => `${item.nombre}`).join(', ');
                 var card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
     <div class="card-body">
         <h5 class="card-title">Código del Pedido: ${pedido.codigo_Pago}</h5>
         <p class="card-text">Número de Mesa: ${pedido.numero_mesa}</p>
+        <p class="card-text">Información Importante: ${pedido.informacion}</p>
+        <p class="card-text">Carrito: ${carritoTexto}</p>
         <form action='finalizar_pedido.php' method='post'>
             <input type='hidden' name='id_pedido' value='${pedido.id_pedido}'>
             <button type='submit' class='btn btn-success'>Finalizar</button>

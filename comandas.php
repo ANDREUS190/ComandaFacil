@@ -13,7 +13,7 @@
 <body>
 <?php include 'header.php'; ?>
 
-    <div id="login-form" class="container">
+    <div id="login-form" class="container p-2">
         <div class="card">
             <div class="card-header">
                 <h2>Por favor, introduce tus datos</h2>
@@ -30,6 +30,10 @@
                         <input type="text" class="form-control" id="name" placeholder="Introduce tu nombre" required>
                     </div>
                     <div class="form-group">
+                        <label for="informacion">Informacion:</label>
+                        <input type="text" class="form-control" id="informacion" placeholder="Introduce los ingredientes que no deseas o a los que tengas alergias">
+                    </div>
+                    <div class="form-group">
                         <label for="table-number">Número de mesa:</label>
                         <input type="number" class="form-control" id="table-number"
                             placeholder="Introduce el número de tu mesa" required>
@@ -42,7 +46,7 @@
     <div class="container-fluid mt-5">
         <div class="row">
             <div class="col-md-9">
-                <div id="barra-menu" class="card">
+                <div id="barra-menu" class="card sticky-top">
                     <div id="category-buttons" class="mb-3 d-flex justify-content-around">
                         <button class="btn btn-primary category-button py-md-3 px-md-5"
                             data-category="comidas">Comidas</button>

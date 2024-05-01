@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Comanda Fácil</title>
+  <title>ComandaFacil</title>
   <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="./estilos.css" rel="stylesheet">
 </head>
@@ -12,9 +12,9 @@
 <body class="bg-dark">
 <?php include 'header.php'; ?>
 
-  <div class="container mt-5">
+  <div class="container">
     <h2 class="text-center text-light">Comanda Fácil</h2>
-    <p class="text-center text-light">La aplicación permitirá a los clientes realizar pedidos desde sus mesas mediante un código QR. Cada mesa tendrá un enlace que redirigirá a los clientes a una página web específica para realizar sus pedidos. Además, una vez que el cliente haya realizado su pedido, se generará un número de pedido único. El cliente deberá presentar este número en el mostrador al momento de pagar.</p>
+    <p class="text-justify text-light">La aplicación permitirá a los clientes realizar pedidos desde sus mesas mediante un código QR. Cada mesa tendrá un enlace que redirigirá a los clientes a una página web específica para realizar sus pedidos. Además, una vez que el cliente haya realizado su pedido, se generará un número de pedido único. El cliente deberá presentar este número en el mostrador al momento de pagar.</p>
   </div>
 
   <div class="container mt-5">

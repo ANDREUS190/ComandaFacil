@@ -12,6 +12,7 @@ if ($conn->connect_error) {
 
 $correo = $_POST['correo'];
 $nombre = $_POST['nombre'];
+$informacion = $_POST['informacion'];
 $numero_mesa = $_POST['numero_mesa'];
 $carrito = json_decode($_POST['carrito'], true);
 
@@ -25,8 +26,8 @@ do {
     $result = $conn->query("SELECT * FROM pedidos WHERE codigo_pago = '$codigo_pago'");
 } while ($result->num_rows > 0);
 
-$sql = "INSERT INTO pedidos (Correo, nombre, numero_Mesa, carrito, codigo_pago, precio_total)
-VALUES ('$correo', '$nombre', '$numero_mesa', '" . json_encode($carrito) . "', '$codigo_pago', $precio_total)";
+$sql = "INSERT INTO pedidos (correo, nombre, informacion, numero_Mesa, carrito, codigo_pago, precio_total)
+VALUES ('$correo', '$nombre', '$informacion', '$numero_mesa', '" . json_encode($carrito) . "', '$codigo_pago', $precio_total)";
 
 if ($conn->query($sql) === TRUE) {
     echo "Pedido procesado con éxito. Tu código de pago es: $codigo_pago";

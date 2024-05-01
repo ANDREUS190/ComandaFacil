@@ -29,14 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
         carritoLista.innerHTML = '';
         carrito.forEach(function(item) {
             var li = document.createElement('li');
-            li.textContent = item.nombre + ' - $' + item.precio;
+            li.textContent = item.nombre + ': ' + item.precio + '€';
             carritoLista.appendChild(li);
         });
-
+    
         var totalDiv = document.createElement('div');
-        totalDiv.textContent = 'Total: $' + calcularTotal();
+        totalDiv.innerHTML = '<strong>Total: ' + calcularTotal() + '€</strong>';
         carritoLista.appendChild(totalDiv);
     }
+    
 
     document.querySelectorAll('.category-button').forEach(button => {
         button.addEventListener('click', function() {
@@ -67,16 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class='card-body align-text-bottom'>
                             <h3 class='card-title'>${item.nombre}</h3>
                             <p class='card-text'>${item.descripcion}</p>
-                            <p class='card-text precio'>Precio: $${item.precio}</p>
+                            <p class='card-text precio'>Precio: ${item.precio}€</p>
                             <input type='hidden' name='item_id[]' value='${item.id_item}'>
                             <div class='text-center'>
                                 <button class='btn btn-primary mt-2 add_to_cart' type='button'>Añadir al carrito</button>
                             </div>
                         </div>
                     </div>
-
-                
-                      `;
+                    `;
                     menuForm.appendChild(div);
                 });
                 var botonesAñadir = document.querySelectorAll('.add_to_cart');
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     boton.addEventListener('click', function(event) {
                         var card = event.target.closest('.card');
                         var nombre = card.querySelector('.card-title').textContent;
-                        var precio = parseFloat(card.querySelector('.card-text.precio').textContent.split('$')[1]);
+                        var precio = parseFloat(card.querySelector('.card-text.precio').textContent.split(' ')[1]);
                         agregarAlCarrito(nombre, precio);
                     });
                 });
@@ -94,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
     enviarCarritoButton.addEventListener('click', function() {
         var email = document.getElementById('email').value;
         var name = document.getElementById('name').value;
+        var informacion = document.getElementById('informacion').value;
         var tableNumber = document.getElementById('table-number').value;
 
         if (!email || !name || !tableNumber) {
@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new FormData();
         formData.append('correo', email);
         formData.append('nombre', name);
+        formData.append('informacion', informacion);
         formData.append('numero_mesa', tableNumber);
         formData.append('carrito', JSON.stringify(carrito));
 
