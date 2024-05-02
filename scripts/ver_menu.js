@@ -29,28 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class='card-body align-text-bottom'>
                         <h3 class='card-title'>${item.nombre}</h3>
                         <p class='card-text'>${item.descripcion}</p>
-                        <p class='card-text precio'>Precio: $${item.precio}</p>
+                        <p class='card-text precio'>Precio: ${item.precio}€</p>
                         <input type='hidden' name='item_id[]' value='${item.id_item}'>
                         <div class='text-center'>
                             <button class='btn btn-primary mt-2 add_to_cart' type='button'>Añadir al carrito</button>
                         </div>
                     </div>
                 </div>
-
-            
-                  `;
+                `;
                 menuForm.appendChild(div);
             });
-        var botonesAñadir = document.querySelectorAll('.add_to_cart');
-        botonesAñadir.forEach(function (boton) {
-          boton.addEventListener('click', function (event) {
-            var card = event.target.closest('.card');
-            var nombre = card.querySelector('.card-title').textContent;
-            var precio = parseFloat(card.querySelector('.card-text').textContent.split('$')[1]);
-            agregarAlCarrito(nombre, precio);
-          });
-        });
-      })
-  }
+            var botonesAñadir = document.querySelectorAll('.add_to_cart');
+            botonesAñadir.forEach(function(boton) {
+                boton.addEventListener('click', function(event) {
+                    var card = event.target.closest('.card');
+                    var nombre = card.querySelector('.card-title').textContent;
+                    var precio = parseFloat(card.querySelector('.card-text.precio').textContent.split(' ')[1]);
+                    agregarAlCarrito(nombre, precio);
+                });
+            });
+        })
+}
 
 });

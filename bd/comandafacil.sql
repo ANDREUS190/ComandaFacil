@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2024 a las 15:20:49
+-- Tiempo de generación: 02-05-2024 a las 17:52:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `comandafacil`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alimentos`
+--
+
+CREATE TABLE `alimentos` (
+  `id_detalle` int(11) NOT NULL,
+  `id_pedido` int(11) DEFAULT NULL,
+  `id_bebida` int(11) DEFAULT NULL,
+  `id_comida` int(11) DEFAULT NULL,
+  `id_postre` int(11) DEFAULT NULL,
+  `id_aperitivo` int(11) DEFAULT NULL,
+  `id_bocadillo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -113,11 +129,17 @@ INSERT INTO `bocadillos` (`id_bocadillo`, `nombre`, `descripcion`, `precio`, `im
 --
 
 CREATE TABLE `clientes` (
-  `ID_Cliente` int(11) NOT NULL,
-  `Nombre` varchar(50) DEFAULT NULL,
-  `Apellido` varchar(50) DEFAULT NULL,
-  `Email` varchar(100) DEFAULT NULL
+  `id_cliente` int(11) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `correo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id_cliente`, `nombre`, `correo`) VALUES
+(3, 'Sergio Andreu', 'sergioandreu10@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -176,19 +198,25 @@ INSERT INTO `comidas` (`id_comida`, `nombre`, `descripcion`, `precio`, `imagen_u
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_pedidos`
+-- Estructura de tabla para la tabla `informacion_pedido`
 --
 
-CREATE TABLE `detalle_pedidos` (
-  `id_detalle` int(11) NOT NULL,
-  `id_pedido` int(11) DEFAULT NULL,
-  `id_bebida` int(11) DEFAULT NULL,
-  `id_comida` int(11) DEFAULT NULL,
-  `id_postre` int(11) DEFAULT NULL,
-  `id_aperitivo` int(11) DEFAULT NULL,
-  `id_bocadillo` int(11) DEFAULT NULL,
-  `Cantidad` int(11) DEFAULT NULL
+CREATE TABLE `informacion_pedido` (
+  `id_informacion` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `codigo_Pago` varchar(255) DEFAULT NULL,
+  `informacion` varchar(255) DEFAULT NULL,
+  `numero_mesa` int(11) DEFAULT NULL,
+  `carrito` text DEFAULT NULL,
+  `precio_total` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `informacion_pedido`
+--
+
+INSERT INTO `informacion_pedido` (`id_informacion`, `id_cliente`, `codigo_Pago`, `informacion`, `numero_mesa`, `carrito`, `precio_total`) VALUES
+(3, 3, '268', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', 12.00);
 
 -- --------------------------------------------------------
 
@@ -200,6 +228,7 @@ CREATE TABLE `pedidos` (
   `id_pedido` int(11) NOT NULL,
   `correo` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
+  `informacion` varchar(255) DEFAULT NULL,
   `numero_mesa` int(11) DEFAULT NULL,
   `carrito` text DEFAULT NULL,
   `codigo_Pago` varchar(255) DEFAULT NULL,
@@ -212,34 +241,26 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `correo`, `nombre`, `numero_mesa`, `carrito`, `codigo_Pago`, `precio_total`, `pagado`, `Finalizado`) VALUES
-(33, 'iuhiu', '87876', 87678, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '819', 4.50, 1, 1),
-(34, '786786', 'y78y78', 877, '[{\"nombre\":\"Fanta Naranja\",\"precio\":2}]', '111', 2.00, 1, 1),
-(35, 'uihyuihui', '87687', 676, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '357', 4.50, 1, 1),
-(37, 'uyguyg', 'uguygu765', 765765, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '701', 4.50, 1, 1),
-(38, 'iuhiuh', 'hiuhiuh', 876786, '[{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4}]', '398', 4.00, 1, 1),
-(39, 'ftyf', '5', 56, '[{\"nombre\":\"Coca-Cola\",\"precio\":2}]', '623', 2.00, 1, 1),
-(40, 'uyguyg', '7656775t', 765765, '[{\"nombre\":\"Brownie\",\"precio\":5.5}]', '574', 5.50, 1, 1),
-(41, 'iuhiu', 'hui', 876, '[{\"nombre\":\"Sprite\",\"precio\":2}]', '753', 2.00, 1, 1),
-(42, 'ffty', 'tyftyf', 565, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '855', 4.50, 1, 1),
-(43, 'uyggyu', 'uyggyu76', 67576576, '[{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4}]', '148', 4.00, 1, 1),
-(44, 'hiuh', '876', 786, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '744', 4.50, 1, 1),
-(45, 'gyuguygyu', 'g76t76576', 7667567, '[{\"nombre\":\"Bocadillo de Tortilla Espau00f1ola\",\"precio\":5.5},{\"nombre\":\"Bocadillo de Tortilla Espau00f1ola\",\"precio\":5.5},{\"nombre\":\"Bocadillo de Jamu00f3n Ibu00e9rico\",\"precio\":7.5},{\"nombre\":\"Bocadillo de Jamu00f3n Ibu00e9rico\",\"precio\":7.5},{\"nombre\":\"Bocadillo de Jamu00f3n Ibu00e9rico\",\"precio\":7.5}]', '642', 33.50, 1, 1),
-(46, 'uihiuh', 'iuhiuh', 87687, '[{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4}]', '124', 4.00, 1, 1),
-(47, 'iuhiuh', '87687', 876876, '[{\"nombre\":\"Fanta Naranja\",\"precio\":2},{\"nombre\":\"Sprite\",\"precio\":2}]', '379', 4.00, 1, 1),
-(48, 'yugyug', '76576', 76576, '[{\"nombre\":\"Tortilla Espau00f1ola\",\"precio\":10},{\"nombre\":\"Gazpacho\",\"precio\":8}]', '436', 18.00, 1, 1),
-(49, 'ytfftyf', 'yt765765', 76576576, '[{\"nombre\":\"Almendras\",\"precio\":3.5}]', '349', 3.50, 1, 1),
-(50, '876', '876', 876, '[{\"nombre\":\"Tortilla Espau00f1ola\",\"precio\":10}]', '346', 10.00, 1, 1),
-(51, '987987', '98798', 798798, '[{\"nombre\":\"Tortilla Espau00f1ola\",\"precio\":10},{\"nombre\":\"Gazpacho\",\"precio\":8}]', '784', 18.00, 1, 1),
-(52, 'hui', '987', 987, '[{\"nombre\":\"Flan\",\"precio\":4.5},{\"nombre\":\"Brownie\",\"precio\":5.5}]', '606', 10.00, 1, 1),
-(53, 'guyuyg', 'guyg', 7685, '[{\"nombre\":\"Bocadillo de Tortilla Espau00f1ola\",\"precio\":5.5}]', '258', 5.50, 1, 1),
-(54, 'uyguy', '786576', 76576, '[{\"nombre\":\"Flan\",\"precio\":4.5},{\"nombre\":\"Brownie\",\"precio\":5.5}]', '719', 10.00, 1, 1),
-(55, 'huihi', 'uh87687', 687687, '[{\"nombre\":\"Brownie\",\"precio\":5.5}]', '376', 5.50, 1, 1),
-(56, 'guyg', 'uyguyguy', 768576, '[{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4}]', '447', 4.00, 1, 1),
-(57, 'jiioj', '9876987', 98798, '[{\"nombre\":\"Brownie\",\"precio\":5.5}]', '735', 5.50, 1, 1),
-(58, 'u89u', '89u89u89', 9, '[{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4},{\"nombre\":\"Boquerones en Vinagre\",\"precio\":4}]', '661', 8.00, 1, 1),
-(59, 'hui', 'iuhui987', 7987987, '[{\"nombre\":\"Flan\",\"precio\":4.5}]', '798', 4.50, 1, 1),
-(60, 'ugy', 'uyguyg', 786, '[{\"nombre\":\"Bocadillo de Tortilla Espau00f1ola\",\"precio\":5.5}]', '772', 5.50, 1, 0);
+INSERT INTO `pedidos` (`id_pedido`, `correo`, `nombre`, `informacion`, `numero_mesa`, `carrito`, `codigo_Pago`, `precio_total`, `pagado`, `Finalizado`) VALUES
+(73, 'sergioandreu10@gmail.com', 'Sergio Andreu', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', '268', 12.00, 1, 1);
+
+--
+-- Disparadores `pedidos`
+--
+DELIMITER $$
+CREATE TRIGGER `generar_informacion` AFTER UPDATE ON `pedidos` FOR EACH ROW BEGIN
+  IF NEW.Finalizado = 1 THEN
+    INSERT INTO clientes (nombre, correo)
+    VALUES (NEW.nombre, NEW.correo);
+    
+    SET @id_cliente_recien_creado = LAST_INSERT_ID();
+    
+    INSERT INTO informacion_pedido (id_cliente, codigo_Pago, informacion, numero_mesa, carrito, precio_total)
+    VALUES (@id_cliente_recien_creado, NEW.codigo_Pago, NEW.informacion, NEW.numero_mesa, NEW.carrito, NEW.precio_total);
+  END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -260,15 +281,27 @@ CREATE TABLE `postres` (
 --
 
 INSERT INTO `postres` (`id_postre`, `nombre`, `descripcion`, `precio`, `imagen_url`) VALUES
-(1, 'Tarta de Queso', 'Una tarta suave y cremosa hecha con queso crema y huevos, generalmente se sirve con una cobertura de mermelada de frutas[^1^][5][5].', 6.00, 'img/postres/tartaQueso.png'),
-(2, 'Brownie', 'Un postre de chocolate denso y rico, a menudo servido con helado[^1^][5][5].', 5.50, 'img/postres/brownie.png'),
-(3, 'Flan', 'Un dulce hecho con huevos, leche y caramelo[^2^][4][4].', 4.50, 'img/postres/flan.png'),
-(6, 'Churros', 'Un postre tradicional en toda España, normalmente se sirven con chocolate caliente o café con leche[^4^][1][1].', 4.00, 'img/postres/churros.png'),
-(8, 'Torrijas de leche', 'Uno de los postres más tradicionales en España, hecho con pan de días anteriores[^4^][1][1].', 6.50, 'img/postres/torrijas.png');
+(1, 'Tarta de Queso', 'Una tarta suave y cremosa hecha con queso crema y huevos, generalmente se sirve con una cobertura de mermelada de frutas.', 6.00, 'img/postres/tartaQueso.png'),
+(2, 'Brownie', 'Un postre de chocolate denso y rico, a menudo servido con helado.', 5.50, 'img/postres/brownie.png'),
+(3, 'Flan', 'Un dulce hecho con huevos, leche y caramelo.', 4.50, 'img/postres/flan.png'),
+(6, 'Churros', 'Un postre tradicional en toda España, normalmente se sirven con chocolate caliente o café con leche.', 4.00, 'img/postres/churros.png'),
+(8, 'Torrijas de leche', 'Uno de los postres más tradicionales en España, hecho con pan de días anteriores.', 6.50, 'img/postres/torrijas.png');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `alimentos`
+--
+ALTER TABLE `alimentos`
+  ADD PRIMARY KEY (`id_detalle`),
+  ADD KEY `ID_Pedido` (`id_pedido`),
+  ADD KEY `ID_Bebida` (`id_bebida`),
+  ADD KEY `ID_Comida` (`id_comida`),
+  ADD KEY `ID_Postre` (`id_postre`),
+  ADD KEY `ID_Aperitivo` (`id_aperitivo`),
+  ADD KEY `ID_Bocadillo` (`id_bocadillo`);
 
 --
 -- Indices de la tabla `aperitivos`
@@ -292,7 +325,7 @@ ALTER TABLE `bocadillos`
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`ID_Cliente`);
+  ADD PRIMARY KEY (`id_cliente`);
 
 --
 -- Indices de la tabla `cocineros`
@@ -307,16 +340,11 @@ ALTER TABLE `comidas`
   ADD PRIMARY KEY (`id_comida`);
 
 --
--- Indices de la tabla `detalle_pedidos`
+-- Indices de la tabla `informacion_pedido`
 --
-ALTER TABLE `detalle_pedidos`
-  ADD PRIMARY KEY (`id_detalle`),
-  ADD KEY `ID_Pedido` (`id_pedido`),
-  ADD KEY `ID_Bebida` (`id_bebida`),
-  ADD KEY `ID_Comida` (`id_comida`),
-  ADD KEY `ID_Postre` (`id_postre`),
-  ADD KEY `ID_Aperitivo` (`id_aperitivo`),
-  ADD KEY `ID_Bocadillo` (`id_bocadillo`);
+ALTER TABLE `informacion_pedido`
+  ADD PRIMARY KEY (`id_informacion`),
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
 -- Indices de la tabla `pedidos`
@@ -335,6 +363,12 @@ ALTER TABLE `postres`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alimentos`
+--
+ALTER TABLE `alimentos`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `aperitivos`
 --
 ALTER TABLE `aperitivos`
@@ -350,7 +384,7 @@ ALTER TABLE `bebidas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `cocineros`
@@ -365,31 +399,37 @@ ALTER TABLE `comidas`
   MODIFY `id_comida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de la tabla `detalle_pedidos`
+-- AUTO_INCREMENT de la tabla `informacion_pedido`
 --
-ALTER TABLE `detalle_pedidos`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `informacion_pedido`
+  MODIFY `id_informacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `detalle_pedidos`
+-- Filtros para la tabla `alimentos`
 --
-ALTER TABLE `detalle_pedidos`
+ALTER TABLE `alimentos`
   ADD CONSTRAINT `FK_DetallePedido_Aperitivo` FOREIGN KEY (`id_aperitivo`) REFERENCES `aperitivos` (`id_aperitivo`),
   ADD CONSTRAINT `FK_DetallePedido_Bebida` FOREIGN KEY (`id_bebida`) REFERENCES `bebidas` (`id_bebida`),
   ADD CONSTRAINT `FK_DetallePedido_Bocadillo` FOREIGN KEY (`id_bocadillo`) REFERENCES `bocadillos` (`id_bocadillo`),
   ADD CONSTRAINT `FK_DetallePedido_Comida` FOREIGN KEY (`id_comida`) REFERENCES `comidas` (`id_comida`),
   ADD CONSTRAINT `FK_DetallePedido_Pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id_pedido`),
   ADD CONSTRAINT `FK_DetallePedido_Postre` FOREIGN KEY (`id_postre`) REFERENCES `postres` (`id_postre`);
+
+--
+-- Filtros para la tabla `informacion_pedido`
+--
+ALTER TABLE `informacion_pedido`
+  ADD CONSTRAINT `informacion_pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
