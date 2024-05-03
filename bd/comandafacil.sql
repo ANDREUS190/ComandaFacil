@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2024 a las 17:52:29
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: localhost
+-- Tiempo de generación: 03-05-2024 a las 17:03:14
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -139,7 +139,8 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre`, `correo`) VALUES
-(3, 'Sergio Andreu', 'sergioandreu10@gmail.com');
+(3, 'Sergio Andreu', 'sergioandreu10@gmail.com'),
+(4, 'Sergio Andreu', 'sergioandreu10@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -216,7 +217,8 @@ CREATE TABLE `informacion_pedido` (
 --
 
 INSERT INTO `informacion_pedido` (`id_informacion`, `id_cliente`, `codigo_Pago`, `informacion`, `numero_mesa`, `carrito`, `precio_total`) VALUES
-(3, 3, '268', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', 12.00);
+(3, 3, '268', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', 12.00),
+(4, 4, '362', 'Bacalao sin salsa', 11, '[{\"nombre\":\"Paella\",\"precio\":15},{\"nombre\":\"Gazpacho\",\"precio\":8},{\"nombre\":\"Bacalao a la Vizcau00edna\",\"precio\":18}]', 41.00);
 
 -- --------------------------------------------------------
 
@@ -242,7 +244,9 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `correo`, `nombre`, `informacion`, `numero_mesa`, `carrito`, `codigo_Pago`, `precio_total`, `pagado`, `Finalizado`) VALUES
-(73, 'sergioandreu10@gmail.com', 'Sergio Andreu', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', '268', 12.00, 1, 1);
+(73, 'sergioandreu10@gmail.com', 'Sergio Andreu', 'Churros sin azucar', 12, '[{\"nombre\":\"Tarta de Queso\",\"precio\":6},{\"nombre\":\"Churros\",\"precio\":4},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', '268', 12.00, 1, 1),
+(74, 'sergioandreu10@gmail.com', 'Sergio Andreu', 'Bacalao sin salsa', 11, '[{\"nombre\":\"Paella\",\"precio\":15},{\"nombre\":\"Gazpacho\",\"precio\":8},{\"nombre\":\"Bacalao a la Vizcau00edna\",\"precio\":18}]', '362', 41.00, 1, 1),
+(76, 'sergioandreu10@gmail.com', 'Sergio ', 'Paella sin carne', 24, '[{\"nombre\":\"Paella\",\"precio\":15},{\"nombre\":\"Coca-Cola\",\"precio\":2}]', '479', 17.00, 1, 0);
 
 --
 -- Disparadores `pedidos`
@@ -384,7 +388,7 @@ ALTER TABLE `bebidas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cocineros`
@@ -402,13 +406,13 @@ ALTER TABLE `comidas`
 -- AUTO_INCREMENT de la tabla `informacion_pedido`
 --
 ALTER TABLE `informacion_pedido`
-  MODIFY `id_informacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_informacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- Restricciones para tablas volcadas
